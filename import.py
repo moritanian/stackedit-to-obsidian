@@ -1,20 +1,21 @@
 import json
 import os
 import sys
+import argparse
 
-# Check command line arguments
-if len(sys.argv) != 2:
-    print("Usage: python import.py <stackedit_workspace.json>")
-    sys.exit(1)
+# Parse command line arguments
+parser = argparse.ArgumentParser(description='Convert StackEdit workspace to Obsidian format')
+parser.add_argument('input_file', help='StackEdit workspace JSON file')
+parser.add_argument('--output-dir', default='obsidian_import', help='Output directory (default: obsidian_import)')
 
-input_file = sys.argv[1]
+args = parser.parse_args()
+input_file = args.input_file
+output_dir = args.output_dir
 
 # Input file (StackEdit backup JSON)
 with open(input_file, "r", encoding="utf-8-sig") as f:
     data = json.load(f)
 
-# Output directory
-output_dir = "obsidian_import"
 os.makedirs(output_dir, exist_ok=True)
 
 
