@@ -1,8 +1,16 @@
 import json
 import os
+import sys
+
+# Check command line arguments
+if len(sys.argv) != 2:
+    print("Usage: python import.py <stackedit_workspace.json>")
+    sys.exit(1)
+
+input_file = sys.argv[1]
 
 # Input file (StackEdit backup JSON)
-with open("stackedit_workspace.json", "r", encoding="utf-8-sig") as f:
+with open(input_file, "r", encoding="utf-8-sig") as f:
     data = json.load(f)
 
 # Output directory
